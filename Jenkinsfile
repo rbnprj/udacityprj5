@@ -15,7 +15,7 @@ pipeline {
 		stage('Build Docker Image ') {
 			steps{
 				// Build image and add a descriptive tag
-				sh "docker build  --tag=udacityprj5 ."
+				sh "sudo docker build  --tag=udacityprj5 ."
 			
 			}
 			
@@ -25,9 +25,9 @@ pipeline {
 			steps{
 				
 			withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-				 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-				 sh "docker tag udacityprj5 rabinprj123/udacityprj5" 
-				 sh 'docker push rabinprj123/udacityprj5'
+				 sh "sudo docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+				 sh "sudo docker tag udacityprj5 rabinprj123/udacityprj5" 
+				 sh 'sudo docker push rabinprj123/udacityprj5'
 				}
 				
 			}
