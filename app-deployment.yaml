@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: capstone/udacityprj5:v1.0
+        image: rabinprj123/udacityprj5
         ports:
         - containerPort: 80
