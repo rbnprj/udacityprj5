@@ -36,7 +36,10 @@ pipeline {
 		stage('Deploy to EKS') {
 			steps {
 				withAWS(region:'us-east-1', credentials:'eks_credentials') {
-					sh "./k8s.sh"
+					sh "aws eks --region us-east-1 update-kubeconfig --name capstoneprj"
+					sh "kubectl apply -f  app-deployment.yaml"
+					sh "kubectl get nodes"
+					sh "kubectl get pods"
 				}
 			}
 		}
