@@ -12,17 +12,21 @@ pipeline {
 				sh 'tidy -q -e *.html'
 			}
 		}
+		stage('Build Docker Image ') {
+			steps{
+				sh "./run_docker.sh"				
+			}
+			
+		}
 		
-		stage('Build Docker Image & upload') {
+		stage('upload docker image') {
 			steps{
 				
-				   docker.withRegistry('https://registry.hub.docker.com', 'DockerHubID') {
-					 echo "build image"
-					def image = docker.build("rabinprj123/udacityprj5")
- 					echo "push image"
-					/* Push the container to the custom Registry */
-					image.push()
-				    }
+			withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+				 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+				 sh "docker tag udacityprj5 rabinprj123/udacityprj5" 
+				 sh 'docker push rabinprj123/udacityprj5'
+				}
 				
 			}
 			
