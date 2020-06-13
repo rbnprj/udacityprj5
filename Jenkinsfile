@@ -15,7 +15,7 @@ pipeline {
 		
 		stage('Build Docker Image & upload') {
 			steps{
-				node {
+				
 				   docker.withRegistry('https://registry.hub.docker.com', 'DockerHubID') {
 					 echo "build image"
 					def image = docker.build("rabinprj123/udacityprj5")
@@ -23,7 +23,7 @@ pipeline {
 					/* Push the container to the custom Registry */
 					image.push()
 				    }
-				}
+				
 			}
 			
 		}
