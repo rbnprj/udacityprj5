@@ -1,0 +1,22 @@
+
+  
+pipeline {
+    //environment {
+      //  registry = "capstone/udacityprj5:v1.0"
+    //}
+	agent any
+	stages {
+
+
+		stage('Deploy to EKS') {
+			steps {
+				withAWS(region:'us-east-1', credentials:'eks_credentials') {
+					sh "create-cluster.sh"
+					
+				}
+			}
+		}
+
+
+	}
+}
