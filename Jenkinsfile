@@ -13,25 +13,17 @@ pipeline {
 			}
 		}
 		
-		stage('Build Docker Image') {
+		stage('Build Docker Image & upload') {
 			steps {
-				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
-					sh "./run_docker.sh"
-				}
+				   docker.withRegistry('https://registry.hub.docker.com', 'DockerHubID') {
+
+					def image = docker.build("rabinprj123/udacityprj5")
+
+					/* Push the container to the custom Registry */
+					image.push()
+				    }
 			}
 		}
-
-		stage('Upload Docker Image') {
-			steps {
-				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
-					sh "./upload_docker.sh"
-				
-
-                    sh "./upload_docker.sh $DOCKER_USERNAME $DOCKER_PASSWORD"
-				}
-			}
-		}
-
 		stage('Deploy to EKS') {
 			steps {
 				withAWS(region:'us-east-1', credentials:'eks_credentials') {
