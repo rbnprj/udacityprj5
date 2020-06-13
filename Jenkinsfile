@@ -14,14 +14,16 @@ pipeline {
 		}
 		
 		stage('Build Docker Image & upload') {
-			
+			steps{
+				
 				   docker.withRegistry('https://registry.hub.docker.com', 'DockerHubID') {
-
+					 echo "build image"
 					def image = docker.build("rabinprj123/udacityprj5")
-
+ 					echo "push image"
 					/* Push the container to the custom Registry */
 					image.push()
 				    }
+			}
 			
 		}
 		stage('Deploy to EKS') {
