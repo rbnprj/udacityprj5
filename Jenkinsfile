@@ -15,7 +15,7 @@ pipeline {
 		stage('Build Docker Image ') {
 			steps{
 				// Build image and add a descriptive tag
-				 docker build  --tag=udacityprj5 .
+				sh "docker build  --tag=udacityprj5 ."
 			
 			}
 			
