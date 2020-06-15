@@ -26,7 +26,7 @@ pipeline {
 				
 			withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
 				 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-				 sh "docker tag udacityprj5 rabinprj123/udacityprj5" 
+				 sh "docker tag udacityprj5 rabinprj123/udacityprj5:$BUILD_ID" 
 				 sh 'docker push rabinprj123/udacityprj5'
 				}
 				
