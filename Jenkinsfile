@@ -38,6 +38,7 @@ pipeline {
 				withAWS(region:'us-east-1', credentials:'eks_credentials') {
 					sh "aws eks --region us-east-1 update-kubeconfig --name capstoneprj"
 					echo "start kube apply"
+					sh "kubectl version"
 					sh "kubectl apply -f  app-deployment.yaml"
 					sh "kubectl get nodes"
 					sh "kubectl get pods"
