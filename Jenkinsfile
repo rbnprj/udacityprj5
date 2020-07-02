@@ -49,7 +49,8 @@ pipeline {
         stage('Rolling update') {
 			steps {
 				withAWS(region:'us-east-1', credentials:'eks_credentials') {
-					sh "./k8s-update.sh"
+					sh "kubectl set image deployment/nginx nginx=rabinprj123/udacityprj5:latest"
+					sh "kubectl rollout status deployment/nginx"
 				}
 			}
 		}
