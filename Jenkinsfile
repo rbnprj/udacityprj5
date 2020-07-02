@@ -41,6 +41,7 @@ pipeline {
 					sh "kubectl apply -f  app-deployment.yaml"
 					sh "kubectl get nodes"
 					sh "kubectl get pods"
+					sh "kubectl describe pods"
 				}
 			}
 		}
