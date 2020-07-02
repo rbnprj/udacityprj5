@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: rabinprj123/udacityprj5:1
+        image: rabinprj123/udacityprj5:latest
         ports:
         - containerPort: 80
