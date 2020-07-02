@@ -51,6 +51,7 @@ pipeline {
 				withAWS(region:'us-east-1', credentials:'eks_credentials') {
 					sh "kubectl set image deployment/nginx nginx=rabinprj123/udacityprj5:latest"
 					sh "kubectl rollout status deployment/nginx"
+					sh "kubectl get deployments"
 				}
 			}
 		}
