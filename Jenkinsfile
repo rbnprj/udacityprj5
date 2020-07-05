@@ -49,7 +49,7 @@ pipeline {
         stage('Rolling update') {
 			steps {
 				withAWS(region:'us-east-1', credentials:'eks_credentials') {
-					sh "kubectl set image deployment/nginx nginx=rabinprj123/udacityprj5"
+					sh "kubectl set image deployment/nginx nginx=rabinprj123/udacityprj5:3"
 					sh "kubectl rollout status deployment/nginx"
 					sh "kubectl get deployments"
 				}
